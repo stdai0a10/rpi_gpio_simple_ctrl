@@ -60,6 +60,20 @@ Python 使用四個空白縮排，YAML 與前端程式碼使用兩個空白；�
 
 本專案必須遵循 [`docs/development-process.md`](docs/development-process.md) 定義的 TDD 流程。每次行為變更都要先新增或修改會因預期原因失敗的測試，再完成最小實作並重構。後端測試檔命名為 `test_*.py`；前端測試框架與命名方式須在前端骨架完成時一併確立。以模擬物件隔離 GPIO 與計時操作，並註明驗證使用模擬環境或實體 Raspberry Pi。
 
+## Agent skills
+
+### Issue tracker
+
+Issues 與規格使用 `.scratch/<feature-slug>/` 下的 Markdown 檔案管理。詳見 `docs/agents/issue-tracker.md`。
+
+### Triage labels
+
+Triage 使用五個預設角色：`needs-triage`、`needs-info`、`ready-for-agent`、`ready-for-human` 與 `wontfix`。詳見 `docs/agents/triage-labels.md`。
+
+### Domain docs
+
+本儲存庫採 single-context，由根目錄 `CONTEXT.md` 與 `docs/adr/` 記錄領域詞彙及架構決策。詳見 `docs/agents/domain.md`。
+
 ## Commit 與 Pull Request 規範
 
 Commit message 採用 Conventional Commits：

@@ -131,6 +131,18 @@ Vitest，測試放在 `frontend/tests/` 並命名為 `*.spec.ts`。以模擬物�
 
 Issues 與規格使用 `.scratch/<feature-slug>/` 下的 Markdown 檔案管理。詳見 `docs/agents/issue-tracker.md`。
 
+### Code review
+
+進行 Spec review 時，`.scratch/<feature-slug>/spec.md` 與其 `issues/` 是唯一的
+canonical spec 入口與對應關係。先依分支名稱、commit 中的 issue 參照或使用者提供
+的 feature slug 尋找對應目錄；有多個候選或無法對應時，先詢問使用者。該入口或
+issue 明確連結的 `docs/` 文件可作為 canonical spec 內容；直接從 `docs/` 找到、
+卻沒有對應 `.scratch/` 入口的文件，不得單獨作為 Spec review 依據。
+
+若找不到 canonical spec，Spec review 必須報告「缺少符合 tracker 規範的 spec」並
+略過該軸；只有使用者明確核准例外來源時，才可使用 `.scratch/` 以外的 spec，且
+報告必須標示該例外。
+
 ### Setup 保護
 
 重新執行 `setup-matt-pocock-skills` 時，必須保留

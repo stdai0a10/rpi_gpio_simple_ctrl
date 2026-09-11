@@ -1,6 +1,6 @@
 # Raspberry Pi GPIO Simple Controller
 
-This context defines the vocabulary for the Raspberry Pi GPIO controller
+This context defines the vocabulary shared by the Raspberry Pi GPIO controller
 and its user-facing web application.
 
 ## Frontend foundation
@@ -12,7 +12,15 @@ _Avoid_: control UI, GPIO dashboard
 
 ## GPIO configuration
 
+**GPIO Function**:
+A user-addressable named behavior whose definition maps to a BCM GPIO.
+_Avoid_: Script, arbitrary pin command
+
 **Function ID**:
-A stable lowercase, hyphenated identifier for a configured GPIO action,
+A stable lowercase, hyphenated identifier for a GPIO Function,
 such as `open-door`, `turn-on`, or `turn-off`.
-_Avoid_: command name, GPIO command
+_Avoid_: command name, GPIO command, Function name, GPIO number
+
+**BCM GPIO Number**:
+The Raspberry Pi SoC GPIO number referenced by a GPIO Function definition.
+_Avoid_: Physical pin number, board pin

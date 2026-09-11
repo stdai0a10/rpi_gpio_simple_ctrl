@@ -1,28 +1,30 @@
 # Issue tracker：Local Markdown
 
-本儲存庫的 issues 與規格以 `.scratch/` 下的 Markdown 檔案管理。
+本儲存庫的 issues、規格與 Wayfinding artifacts 以 `.scratch/` 下的
+Markdown 檔案管理。
 
 ## 檔案慣例
 
 - 每項功能使用一個目錄：`.scratch/<feature-slug>/`
 - 規格存放於 `.scratch/<feature-slug>/spec.md`
-- 每張實作票各自存放於 `.scratch/<feature-slug>/issues/<NN>-<slug>.md`
-- 票號由 `01` 開始遞增，不得合併為單一 tickets 檔案
-- Triage 狀態以 issue 檔案開頭附近的 `Status:` 記錄；可用值詳見 `triage-labels.md`
+- 實作票存放於 `.scratch/<feature-slug>/issues/<NN>-<slug>.md`
 - 討論紀錄附加於檔案底部的 `## Comments`
 
-## 發布與讀取
+## Triage 欄位
 
-當 Skill 要求「publish to the issue tracker」時，建立對應的 `.scratch/<feature-slug>/` 及 Markdown 檔案。
+已進入 triage 的 issue 使用：
 
-當 Skill 要求「fetch the relevant ticket」時，讀取使用者指定的檔案路徑或票號。
+- `Category:`：`bug` 或 `enhancement`
+- `Status:`：五個 triage 狀態之一；詳見 `triage-labels.md`
 
-## Wayfinding 操作
+## Wayfinding 欄位
 
-- Map：`.scratch/<effort>/map.md`
-- Child ticket：`.scratch/<effort>/issues/<NN>-<slug>.md`
-- `Type:` 可為 `research`、`prototype`、`grilling` 或 `task`
-- `Status:` 可為 `claimed` 或 `resolved`
-- `Blocked by: NN, NN` 記錄相依票號
-- Claim 時先將狀態改為 `claimed`
-- Resolve 時加入 `## Answer`、將狀態改為 `resolved`，並更新 map
+Wayfinding map 位於 `.scratch/<effort>/map.md`，child ticket 位於
+`.scratch/<effort>/issues/<NN>-<slug>.md`。Wayfinding 另使用：
+
+- `Type:`：`research`、`prototype`、`grilling` 或 `task`
+- `Execution Status:`：`claimed` 或 `resolved`
+- `Blocked by:`：相依票號，例如 `01, 02`
+
+Wayfinding 必須以 `Execution Status:` 判斷 frontier 與相依是否解除；
+不得覆寫 triage 的 `Status:`。

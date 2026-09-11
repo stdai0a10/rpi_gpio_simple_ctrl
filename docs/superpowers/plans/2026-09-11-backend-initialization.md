@@ -170,7 +170,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "rpi-gpio-simple-ctrl-backend"
 version = "0.1.0"
-description = "FastAPI backend for Raspberry Pi GPIO Simple Control"
+description = "FastAPI backend for Raspberry Pi GPIO Simple Controller"
 requires-python = ">=3.13,<3.14"
 dependencies = [
   "fastapi==0.141.1",
@@ -204,7 +204,7 @@ Create these files with the shown contents:
 `backend/app/__init__.py`
 
 ```python
-"""Raspberry Pi GPIO Simple Control backend."""
+"""Raspberry Pi GPIO Simple Controller backend."""
 ```
 
 `backend/app/api/__init__.py`
@@ -602,7 +602,7 @@ def test_importing_main_does_not_load_settings() -> None:
 
 
 def test_application_metadata(application: FastAPI) -> None:
-    assert application.title == "Raspberry Pi GPIO Simple Control"
+    assert application.title == "Raspberry Pi GPIO Simple Controller"
     assert application.version == "0.1.0"
 
 
@@ -735,7 +735,7 @@ from app.core.settings import Settings
 def create_app(settings: Settings | None = None) -> FastAPI:
     """Create and configure the FastAPI application."""
     application = FastAPI(
-        title="Raspberry Pi GPIO Simple Control",
+        title="Raspberry Pi GPIO Simple Controller",
         version="0.1.0",
         lifespan=create_lifespan(settings),
     )
@@ -1129,7 +1129,7 @@ from app.core.settings import Settings
 def create_app(settings: Settings | None = None) -> FastAPI:
     """Create and configure the FastAPI application."""
     application = FastAPI(
-        title="Raspberry Pi GPIO Simple Control",
+        title="Raspberry Pi GPIO Simple Controller",
         version="0.1.0",
         lifespan=create_lifespan(settings),
     )

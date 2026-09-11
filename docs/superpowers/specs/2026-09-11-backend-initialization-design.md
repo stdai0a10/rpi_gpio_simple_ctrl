@@ -8,7 +8,7 @@
 
 ## 1. 目的
 
-本規格定義 Raspberry Pi GPIO Simple Control 專案第一階段後端骨架。完成後，專案應具備可啟動的 FastAPI 應用程式、存活檢查、設定驗證、可信任來源 IP 限制、自動化測試，以及可重現的安裝與開發指令。
+本規格定義 Raspberry Pi GPIO Simple Controller 專案第一階段後端骨架。完成後，專案應具備可啟動的 FastAPI 應用程式、存活檢查、設定驗證、可信任來源 IP 限制、自動化測試，以及可重現的安裝與開發指令。
 
 本階段的目標是建立後續 GPIO Function 功能可依賴的穩定 HTTP 與設定基礎，不提前建立尚未使用的 GPIO、儲存或認證抽象。
 
@@ -222,7 +222,7 @@ app = create_app()
 - 測試可以注入已建立且有效的 Settings。
 - 未注入時，設定由 lifespan 延遲建立。
 - application factory 設定 router、middleware、lifespan 與 metadata。
-- FastAPI title 為 `Raspberry Pi GPIO Simple Control`。
+- FastAPI title 為 `Raspberry Pi GPIO Simple Controller`。
 - FastAPI version 為 `0.1.0`。
 
 ### 8.2 Lifespan

@@ -22,6 +22,11 @@
 
 `backend/pyproject.toml` 是後端唯一 Python 專案與直接相依套件來源。Python 必須符合 `>=3.13,<3.14`，虛擬環境固定使用 `backend/.venv/`。
 
+目前以 `pyproject.toml` 中的精確版本釘選維持直接相依套件可重現性。未經
+明確核准，不得新增 Python lockfile、`constraints.txt`、`requirements*.txt` 或
+其他第二套相依套件來源；如確有需要，須先說明其用途、維護方式與對既有安裝
+指令的影響。
+
 Windows 安裝與啟動：
 
 ```powershell
@@ -89,6 +94,8 @@ npm run preview
 且不會修改追蹤或未追蹤的專案檔案；型別檢查可能更新
 `node_modules/.tmp` 中已忽略的快取。
 
+凡包含前端變更的交付或合併前，必須執行並通過完整的 `npm run check`。
+
 ### 共用檢查
 
 所有平台在交付前都應執行：
@@ -105,7 +112,18 @@ Python 使用四個空白縮排，YAML 與前端程式碼使用兩個空白；�
 
 ## 測試準則
 
-本專案必須遵循 [`docs/development-process.md`](docs/development-process.md) 定義的 TDD 流程。每次行為變更都要先新增或修改會因預期原因失敗的測試，再完成最小實作並重構。後端測試檔命名為 `test_*.py`；前端使用 Vitest，測試放在 `frontend/tests/` 並命名為 `*.spec.ts`。以模擬物件隔離 GPIO 與計時操作，並註明驗證使用模擬環境或實體 Raspberry Pi。
+本專案必須遵循 [`docs/development-process.md`](docs/development-process.md) 定義的
+TDD 流程；該文件是最高優先的專案規則，必須遵守。`tdd` skill 僅提供測試設計與執行的
+補充指引，兩者衝突時以本文件為準。每次行為變更都要先新增或修改會因預期原因
+失敗的測試，再完成最小實作並重構。後端測試檔命名為 `test_*.py`；前端使用
+Vitest，測試放在 `frontend/tests/` 並命名為 `*.spec.ts`。以模擬物件隔離 GPIO
+與計時操作，並註明驗證使用模擬環境或實體 Raspberry Pi。
+
+## 工作目錄與變更隔離
+
+執行多步驟功能工作時，預設使用隔離的 Git worktree。若使用者明確核准在目前
+工作目錄作業，該決定優先；開始前仍須確認既有變更，並在整個工作期間僅修改
+核准範圍內的檔案。不得為了建立 worktree 而移動、清除或納入使用者既有變更。
 
 ## Agent skills
 
@@ -205,4 +223,4 @@ Hotfix 同時有人工衝突處理時，一個 `Verification:` 欄位即可同�
 
 功能整合原則上在本機以 Git 建立 merge commit；只有 Git hosting service 能產生完全符合本節格式的訊息時，才可使用其合併介面。目前為單人開發，hotfix 直接整合至 `main` 不要求 `Approval:` 欄位。
 
-Pull Request 必須說明行為與設定變更、連結相關 issue、列出執行過的檢查及結果，並標明受影響的 GPIO 腳位或啟動／關閉狀態。Vue 介面變更應附截圖，GPIO 變更應附硬體測試說明。禁止提交憑證、裝置專用密鑰或執行期資料。
+Pull Request 必須說明行為與設定變更、連結相關 issue、列出執行過的檢查及結果，並標明受影響的 GPIO 腳位或啟動／關閉狀態。GPIO 變更應附硬體測試說明。禁止提交憑證、裝置專用密鑰或執行期資料。

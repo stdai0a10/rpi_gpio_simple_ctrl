@@ -40,7 +40,33 @@ macOS／Linux：
 
 ### 前端
 
-`frontend/package.json` 目前為空，尚未建立可執行的安裝、開發、測試或建置指令。在 Vue.js 專案初始化並定義 npm scripts 前，請勿假設 `npm install`、`npm run dev`、`npm test` 或 `npm run build` 可以執行。
+前端需要 Node.js `^22.18.0 || >=24.12.0`，套件管理統一使用 npm。
+首次取得或 lockfile 更新後安裝相依套件：
+
+```shell
+cd frontend
+npm ci
+```
+
+常用指令：
+
+```shell
+npm run dev
+npm run format
+npm run format:check
+npm run lint
+npm run lint:fix
+npm run type-check
+npm run test:unit
+npm run test:unit:watch
+npm run check
+npm run build
+npm run preview
+```
+
+`npm run check` 依序執行格式檢查、ESLint、TypeScript 型別檢查與 Vitest，
+且不會修改追蹤或未追蹤的專案檔案；型別檢查可能更新
+`node_modules/.tmp` 中已忽略的快取。
 
 ### 共用檢查
 
@@ -54,7 +80,7 @@ git diff --check
 
 ## 程式風格與命名慣例
 
-Python 使用四個空白縮排，YAML 與前端程式碼使用兩個空白；禁止使用 Tab。Python 遵循 PEP 8：模組、函式及變數使用 `snake_case`，類別使用 `PascalCase`，常數使用 `UPPER_SNAKE_CASE`。公開函式須加上型別提示，GPIO 存取應封裝於 `backend/app/services/`。函式 ID 使用小寫連字號格式，例如 `open-door`。目前未設定 formatter 或 linter，請避免無關的大範圍格式調整。
+Python 使用四個空白縮排，YAML 與前端程式碼使用兩個空白；禁止使用 Tab。Python 遵循 PEP 8：模組、函式及變數使用 `snake_case`，類別使用 `PascalCase`，常數使用 `UPPER_SNAKE_CASE`。公開函式須加上型別提示，GPIO 存取應封裝於 `backend/app/services/`。函式 ID 使用小寫連字號格式，例如 `open-door`。前端由 Prettier 與 ESLint 管理格式及靜態檢查，請避免無關的大範圍格式調整。
 
 ## 測試準則
 

@@ -166,7 +166,19 @@ def test_missing_client_address_is_denied() -> None:
 
 @pytest.mark.parametrize(
     "client_address",
-    [None, (), ("not-an-ip", 50000)],
+    [
+        None,
+        (),
+        ("not-an-ip", 50000),
+        ("127.0.0.1",),
+        ("127.0.0.1", 50000, "extra"),
+        ["127.0.0.1", 50000],
+        (127001, 50000),
+        ("127.0.0.1", "50000"),
+        ("127.0.0.1", True),
+        ("127.0.0.1", -1),
+        ("127.0.0.1", 65536),
+    ],
 )
 def test_invalid_client_address_is_denied(client_address: object) -> None:
     scope = build_http_scope(client_address)

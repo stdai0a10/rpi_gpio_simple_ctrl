@@ -59,11 +59,11 @@ class TrustedIPMiddleware:
     @staticmethod
     def _source_address(scope: Scope) -> IpAddress | None:
         client = scope.get("client")
-        if not isinstance(client, (tuple, list)) or not client:
+        if not isinstance(client, tuple) or len(client) != 2:
             return None
 
-        host = client[0]
-        if not isinstance(host, str):
+        host, port = client
+        if not isinstance(host, str) or type(port) is not int or not 0 <= port <= 65535:
             return None
 
         try:

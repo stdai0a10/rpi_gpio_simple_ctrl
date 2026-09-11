@@ -20,27 +20,74 @@
 
 ### 後端
 
-`backend/requirements.txt` 目前為空，尚未定義相依套件、測試或 FastAPI 啟動流程。可先建立虛擬環境並檢查 Python 語法：
+`backend/pyproject.toml` 是後端唯一 Python 專案與直接相依套件來源。Python 必須符合 `>=3.13,<3.14`，虛擬環境固定使用 `backend/.venv/`。
 
-```shell
-python -m venv backend/.venv
-```
-
-Windows：
+Windows 安裝與啟動：
 
 ```powershell
-backend\.venv\Scripts\python.exe -m compileall backend/app
+py -3.13 -m venv backend/.venv
+backend\.venv\Scripts\python.exe -m pip install -e "backend[dev]"
+backend\.venv\Scripts\python.exe -m uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload --no-proxy-headers
 ```
 
-macOS／Linux：
+Linux 開發環境：
+
+以下指令本次未在 Linux 環境實際執行，仍待平台驗證：
 
 ```shell
-./backend/.venv/bin/python -m compileall backend/app
+python3.13 -m venv backend/.venv
+./backend/.venv/bin/python -m pip install -e "backend[dev]"
+./backend/.venv/bin/python -m uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload --no-proxy-headers
+```
+
+Raspberry Pi runtime 只安裝必要套件並使用單一 worker：
+
+以下指令本次未在 Raspberry Pi 實機執行，完整相容性仍待目標映像與硬體驗證：
+
+```shell
+python3 -m venv backend/.venv
+./backend/.venv/bin/python -m pip install -e backend
+./backend/.venv/bin/python -m uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 1 --no-proxy-headers
+```
+
+後端測試與檢查：
+
+```powershell
+backend\.venv\Scripts\python.exe -m pytest backend/tests
+backend\.venv\Scripts\python.exe -m compileall backend/app
+backend\.venv\Scripts\python.exe -m isort --check-only --diff backend/app backend/tests
+backend\.venv\Scripts\python.exe -m black --check --diff backend/app backend/tests
 ```
 
 ### 前端
 
-`frontend/package.json` 目前為空，尚未建立可執行的安裝、開發、測試或建置指令。在 Vue.js 專案初始化並定義 npm scripts 前，請勿假設 `npm install`、`npm run dev`、`npm test` 或 `npm run build` 可以執行。
+前端需要 Node.js `^22.18.0 || >=24.12.0`，套件管理統一使用 npm。
+首次取得或 lockfile 更新後安裝相依套件：
+
+```shell
+cd frontend
+npm ci
+```
+
+常用指令：
+
+```shell
+npm run dev
+npm run format
+npm run format:check
+npm run lint
+npm run lint:fix
+npm run type-check
+npm run test:unit
+npm run test:unit:watch
+npm run check
+npm run build
+npm run preview
+```
+
+`npm run check` 依序執行格式檢查、ESLint、TypeScript 型別檢查與 Vitest，
+且不會修改追蹤或未追蹤的專案檔案；型別檢查可能更新
+`node_modules/.tmp` 中已忽略的快取。
 
 ### 共用檢查
 
@@ -54,7 +101,7 @@ git diff --check
 
 ## 程式風格與命名慣例
 
-Python 使用四個空白縮排，YAML 與前端程式碼使用兩個空白；禁止使用 Tab。Python 遵循 PEP 8：模組、函式及變數使用 `snake_case`，類別使用 `PascalCase`，常數使用 `UPPER_SNAKE_CASE`。公開函式須加上型別提示，GPIO 存取應封裝於 `backend/app/services/`。函式 ID 使用小寫連字號格式，例如 `open-door`。目前未設定 formatter 或 linter，請避免無關的大範圍格式調整。
+Python 使用四個空白縮排，YAML 與前端程式碼使用兩個空白；禁止使用 Tab。Python 遵循 PEP 8：模組、函式及變數使用 `snake_case`，類別使用 `PascalCase`，常數使用 `UPPER_SNAKE_CASE`。公開函式須加上型別提示，GPIO 存取應封裝於 `backend/app/services/`。函式 ID 使用小寫連字號格式，例如 `open-door`。Python imports 使用 isort 的 Black profile 排序，其他 Python 格式由 Black 處理；自動格式化時固定先執行 isort，再執行 Black。前端由 Prettier 與 ESLint 管理格式及靜態檢查。請避免無關的大範圍格式調整。
 
 ## 測試準則
 

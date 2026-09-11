@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rpi-gpio-simple-ctrl-backend"
+version = "0.1.0"
+description = "FastAPI backend for Raspberry Pi GPIO Simple Controller"
+requires-python = ">=3.13,<3.14"
+dependencies = [
+  "fastapi==0.141.1",
+  "uvicorn==0.52.4",
+  "pydantic-settings==2.15.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest==9.1.1",
+  "httpx==0.28.1",
+  "black==26.5.1",
+  "isort==9.0.1",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["app*"]
+
+[tool.black]
+target-version = ["py313"]
+
+[tool.isort]
+profile = "black"

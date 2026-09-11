@@ -7,6 +7,7 @@ from fastapi import FastAPI
 from app.core.settings import Settings
 
 logger = logging.getLogger(__name__)
+logger.parent = logging.getLogger("uvicorn.error")
 Lifespan = Callable[[FastAPI], AbstractAsyncContextManager[None]]
 
 

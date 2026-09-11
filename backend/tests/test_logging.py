@@ -55,5 +55,41 @@ with TestClient(
     assert result.returncode == 0, result.stderr
     assert "INFO:     Application started" in result.stderr
     assert "INFO:     Application stopped" in result.stderr
-    assert "WARNING:  Blocked request from 127.0.0.1: GET /health" in result.stderr
+    assert "WARNING:  Blocked request from 127.0.0.1: GET '/health'" in result.stderr
     assert "super-secret" not in result.stderr
+
+
+def test_blocked_request_log_escapes_decoded_control_characters() -> None:
+    environment = os.environ.copy()
+    environment["TRUSTED_IP_RANGES"] = "192.0.2.0/24"
+    script = """
+from fastapi.testclient import TestClient
+from uvicorn import Config
+
+from app.core.settings import Settings
+from app.main import create_app
+
+Config(app="app.main:app", use_colors=False).configure_logging()
+application = create_app(Settings(_env_file=None))
+with TestClient(
+    application,
+    client=("127.0.0.1", 50000),
+) as client:
+    response = client.get("/health%0AInjected%09Entry")
+    assert response.status_code == 403
+"""
+
+    result = subprocess.run(
+        [sys.executable, "-c", script],
+        cwd=REPOSITORY_ROOT,
+        env=environment,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert result.returncode == 0, result.stderr
+    assert (
+        "WARNING:  Blocked request from 127.0.0.1: " "GET '/health\\nInjected\\tEntry'"
+    ) in result.stderr
+    assert "\nInjected" not in result.stderr

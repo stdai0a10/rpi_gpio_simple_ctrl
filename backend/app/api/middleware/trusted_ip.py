@@ -45,7 +45,7 @@ class TrustedIPMiddleware:
             else "<missing-or-invalid>"
         )
         logger.warning(
-            "Blocked request from %s: %s %s",
+            "Blocked request from %s: %s %r",
             source_label,
             scope.get("method", "UNKNOWN"),
             scope.get("path", ""),

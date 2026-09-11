@@ -9,7 +9,6 @@ from starlette.types import ASGIApp, Receive, Scope, Send
 from app.core.settings import Settings
 
 logger = logging.getLogger(__name__)
-logger.parent = logging.getLogger("uvicorn.error")
 IpAddress = IPv4Address | IPv6Address
 
 

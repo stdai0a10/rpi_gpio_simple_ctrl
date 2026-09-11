@@ -10,6 +10,8 @@ def test_application_logs_use_uvicorn_configuration() -> None:
     environment = os.environ.copy()
     environment["TRUSTED_IP_RANGES"] = "127.0.0.1/32,::1/128"
     script = """
+import logging
+
 from fastapi.testclient import TestClient
 from uvicorn import Config
 
@@ -17,6 +19,8 @@ from app.core.settings import Settings
 from app.main import create_app
 
 Config(app="app.main:app", use_colors=False).configure_logging()
+logging.getLogger("app")
+logging.getLogger("app.core")
 
 allowed_application = create_app(Settings(_env_file=None))
 with TestClient(

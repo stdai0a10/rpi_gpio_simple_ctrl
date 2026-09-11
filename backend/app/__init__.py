@@ -1,4 +1,4 @@
-"""Raspberry Pi GPIO Simple Control backend."""
+"""Raspberry Pi GPIO Simple Controller backend."""
 
 import logging
 

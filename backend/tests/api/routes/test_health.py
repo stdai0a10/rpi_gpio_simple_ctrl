@@ -31,7 +31,7 @@ def test_importing_main_does_not_load_settings() -> None:
 
 
 def test_application_metadata(application: FastAPI) -> None:
-    assert application.title == "Raspberry Pi GPIO Simple Control"
+    assert application.title == "Raspberry Pi GPIO Simple Controller"
     assert application.version == "0.1.0"
 
 

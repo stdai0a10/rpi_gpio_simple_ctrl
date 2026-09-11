@@ -44,6 +44,8 @@ backend\.venv\Scripts\python.exe -m uvicorn app.main:app --host 127.0.0.1 --port
 
 ## Linux 開發
 
+> 驗證狀態：以下指令本次未在 Linux 環境實際執行，仍待平台驗證。
+
 ```shell
 python3.13 -m venv backend/.venv
 ./backend/.venv/bin/python -m pip install -e "backend[dev]"
@@ -51,6 +53,8 @@ python3.13 -m venv backend/.venv
 ```
 
 ## Raspberry Pi 執行
+
+> 驗證狀態：以下指令本次未在 Raspberry Pi 實機執行，完整相容性仍待目標映像與硬體驗證。
 
 ```shell
 python3 -m venv backend/.venv

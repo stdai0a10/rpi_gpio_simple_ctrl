@@ -6,7 +6,11 @@
 
 **Blocked by:** None (can start immediately).
 
-**Status:** resolved
+**Status:** ready-for-agent
+
+**Type:** task
+
+**Execution Status:** resolved
 
 - [x] 受信任來源可取得 SPA root、實際前端資產與 HTML 導覽 fallback；遺失實體資產維持 `404`。
 - [x] 不完整的 frontend bundle 會使 lifespan 啟動失敗；完整 bundle 啟動後既有 `/health`、`/docs`、`/redoc` 與 `/openapi.json` 行為不變。

@@ -11,6 +11,8 @@ def test_application_logs_use_uvicorn_configuration() -> None:
     environment["TRUSTED_IP_RANGES"] = "127.0.0.1/32,::1/128"
     script = """
 import logging
+from pathlib import Path
+from tempfile import TemporaryDirectory
 
 from fastapi.testclient import TestClient
 from uvicorn import Config
@@ -22,7 +24,15 @@ Config(app="app.main:app", use_colors=False).configure_logging()
 logging.getLogger("app")
 logging.getLogger("app.core")
 
-allowed_application = create_app(Settings(_env_file=None))
+temporary_directory = TemporaryDirectory()
+frontend_directory = Path(temporary_directory.name) / "dist"
+frontend_directory.mkdir()
+(frontend_directory / "index.html").write_text("<!doctype html>", encoding="utf-8")
+
+allowed_application = create_app(
+    Settings(_env_file=None),
+    frontend_directory=frontend_directory,
+)
 with TestClient(
     allowed_application,
     client=("127.0.0.1", 50000),
@@ -30,7 +40,8 @@ with TestClient(
     assert client.get("/health").status_code == 200
 
 denied_application = create_app(
-    Settings(trusted_ip_ranges="192.0.2.0/24", _env_file=None)
+    Settings(trusted_ip_ranges="192.0.2.0/24", _env_file=None),
+    frontend_directory=frontend_directory,
 )
 with TestClient(
     denied_application,
@@ -64,13 +75,22 @@ def test_blocked_request_log_escapes_decoded_control_characters() -> None:
     environment["TRUSTED_IP_RANGES"] = "192.0.2.0/24"
     script = """
 from fastapi.testclient import TestClient
+from pathlib import Path
+from tempfile import TemporaryDirectory
 from uvicorn import Config
 
 from app.core.settings import Settings
 from app.main import create_app
 
 Config(app="app.main:app", use_colors=False).configure_logging()
-application = create_app(Settings(_env_file=None))
+temporary_directory = TemporaryDirectory()
+frontend_directory = Path(temporary_directory.name) / "dist"
+frontend_directory.mkdir()
+(frontend_directory / "index.html").write_text("<!doctype html>", encoding="utf-8")
+application = create_app(
+    Settings(_env_file=None),
+    frontend_directory=frontend_directory,
+)
 with TestClient(
     application,
     client=("127.0.0.1", 50000),

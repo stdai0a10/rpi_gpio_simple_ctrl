@@ -10,6 +10,11 @@ The initial web-interface boundary that identifies the project without
 communicating with device-control services.
 _Avoid_: control UI, GPIO dashboard
 
+**Service connection**:
+The web application's liveness as observed by the browser; it does not
+describe Raspberry Pi, GPIO, or hardware health.
+_Avoid_: Raspberry Pi online, GPIO healthy, hardware status
+
 ## GPIO configuration
 
 **GPIO Function**:

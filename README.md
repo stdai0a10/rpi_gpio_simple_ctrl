@@ -1,4 +1,4 @@
-# RPI_GPIO_SIMPLE_CTRL
+# Raspberry Pi GPIO Simple Controller
 
 簡易的 Raspberry Pi GPIO 控制器。目前後端初始化階段提供 FastAPI 存活檢查與可信任來源 IP 限制；GPIO 控制將於後續階段加入。
 
@@ -125,6 +125,25 @@ npm run dev
 npm run check
 npm run build
 ```
+
+## 前端交付與部署
+
+正式環境由 Uvicorn 單獨提供 FastAPI 與已編譯的 Vue SPA。先在同一個
+checkout 或 release 執行：
+
+```shell
+npm --prefix frontend ci
+npm --prefix frontend run check
+npm --prefix frontend run build
+```
+
+這會產生未納入 Git 的 `frontend/dist/`。啟動 application 前，該目錄及
+`index.html` 必須存在；否則 Uvicorn 會在接受請求前失敗，並提示重新建置或
+複製 bundle。靜態檔案與 SPA route 和 `/health`、`/api`、OpenAPI 文件一樣受
+`TRUSTED_IP_RANGES` 限制。
+
+Raspberry Pi 上建置、在其他機器建置後複製，以及 release archive 的完整流程，
+請見[前端交付與部署](docs/frontend-deployment.md)。
 
 ## 開發流程
 

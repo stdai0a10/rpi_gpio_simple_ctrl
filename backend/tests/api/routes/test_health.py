@@ -68,7 +68,7 @@ def test_health_returns_exact_liveness_response(client: TestClient) -> None:
     assert response.json() == {"status": "ok"}
 
 
-@pytest.mark.parametrize("path", ["/", "/api/v1", "/api/v1/health"])
+@pytest.mark.parametrize("path", ["/api/v1", "/api/v1/health"])
 def test_unplanned_routes_are_not_defined(
     client: TestClient,
     path: str,

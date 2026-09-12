@@ -5,6 +5,13 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
   plugins: [vue()],
+  server: {
+    host: '127.0.0.1',
+    proxy: {
+      '^/health(?:\\?|$)': { target: 'http://127.0.0.1:8000' },
+      '^/api(?:/|\\?|$)': { target: 'http://127.0.0.1:8000' }
+    }
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))

@@ -6,7 +6,11 @@
 
 **Blocked by:** 01: 透過 Uvicorn 提供 Vue bundle。
 
-**Status:** resolved
+**Status:** ready-for-agent
+
+**Type:** task
+
+**Execution Status:** resolved
 
 - [x] 未知 `/api` 路徑回傳 FastAPI 預設 JSON `404`，不會取得 SPA fallback。
 - [x] 未受信任來源存取 SPA root、實體資產、SPA route、API 與文件 routes 時，皆得到既有固定 `403` 回應。

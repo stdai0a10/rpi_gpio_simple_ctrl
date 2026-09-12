@@ -6,7 +6,11 @@
 
 **Blocked by:** 01: 透過 Uvicorn 提供 Vue bundle；02: 保留 API 與 trusted-IP 契約；03: 設定 loopback Vite 開發 proxy。
 
-**Status:** resolved
+**Status:** ready-for-agent
+
+**Type:** task
+
+**Execution Status:** resolved
 
 - [x] README 提供摘要，專屬部署文件完整說明 Pi 建置、外部建置後複製，以及含 bundle release archive 三種流程。
 - [x] 文件說明 bundle 與 backend 必須來自同一 checkout 或 release，並排除 dependency directories、virtual environment、`.env` 與 runtime data；Raspberry Pi 型號僅供參考。

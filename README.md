@@ -1,4 +1,4 @@
-# RPI_GPIO_SIMPLE_CTRL
+# Raspberry Pi GPIO Simple Controller
 
 簡易的 Raspberry Pi GPIO 控制器。目前後端初始化階段提供 FastAPI 存活檢查與可信任來源 IP 限制；GPIO 控制將於後續階段加入。
 

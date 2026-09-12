@@ -6,8 +6,8 @@
 
 **Blocked by:** None (can start immediately).
 
-**Status:** ready-for-agent
+**Status:** ready-for-human
 
-- [ ] Vite dev server 只綁定 loopback，且只將 `/health` 與 `/api` 代理至本機 Uvicorn。
-- [ ] frontend 可透過相對 URL 使用被代理的 backend paths，不需硬編碼 backend host 或 port。
-- [ ] backend 文件 routes 不經由 Vite proxy，仍直接由 Uvicorn 提供。
+- [x] Vite dev server 只綁定 loopback，且只將 `/health` 與 `/api` 代理至本機 Uvicorn。
+- [x] frontend 可透過相對 URL 使用被代理的 backend paths，不需硬編碼 backend host 或 port。
+- [x] backend 文件 routes 不經由 Vite proxy，仍直接由 Uvicorn 提供。

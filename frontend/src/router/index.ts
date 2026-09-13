@@ -2,12 +2,24 @@ import { createRouter, createWebHistory } from 'vue-router';
 import type { RouteRecordRaw } from 'vue-router';
 
 import HomeView from '@/views/HomeView.vue';
+import SettingsView from '@/views/SettingsView.vue';
 
 export const routes: RouteRecordRaw[] = [
   {
     path: '/',
     name: 'home',
-    component: HomeView
+    component: HomeView,
+    meta: {
+      title: '首頁'
+    }
+  },
+  {
+    path: '/settings',
+    name: 'settings',
+    component: SettingsView,
+    meta: {
+      title: '設定'
+    }
   }
 ];
 

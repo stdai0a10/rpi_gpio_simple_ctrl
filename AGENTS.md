@@ -106,6 +106,17 @@ git diff --check
 
 新增相依套件或執行流程時，須一併提交可重現的套件清單，並在本章節補上對應的安裝、啟動、測試及建置指令。
 
+### Markdown 行尾空白
+
+Markdown 檔案可保留恰好兩個行尾空白，僅限於刻意表示 Markdown hard line
+break 的情況；應先確認該空白確實具有換行語意。若不需要強制換行，應移除行尾
+空白，或改用空白行、`<br>` 等明確寫法。多於兩個行尾空白、Tab 及其他非必要
+trailing whitespace 仍須清除。
+
+`git diff --check` 與 `git diff --cached --check` 仍會標記上述 Markdown 例外；
+審查時須逐處確認其 hard line break 語意，不能將未確認的 trailing whitespace
+視為例外。
+
 ## 程式風格與命名慣例
 
 Python 使用四個空白縮排，YAML 與前端程式碼使用兩個空白；禁止使用 Tab。Python 遵循 PEP 8：模組、函式及變數使用 `snake_case`，類別使用 `PascalCase`，常數使用 `UPPER_SNAKE_CASE`。公開函式須加上型別提示，GPIO 存取應封裝於 `backend/app/services/`。函式 ID 使用小寫連字號格式，例如 `open-door`。Python imports 使用 isort 的 Black profile 排序，其他 Python 格式由 Black 處理；自動格式化時固定先執行 isort，再執行 Black。前端由 Prettier 與 ESLint 管理格式及靜態檢查。請避免無關的大範圍格式調整。

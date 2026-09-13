@@ -32,12 +32,12 @@ Desktop 使用固定 Sidebar，Mobile 使用 Top Bar 與 Navigation Drawer。導
 spec 明確覆寫或延後，實作應引用下列設計文件，而非重複複製其中的 token、版型或
 元件規範：
 
-- [Web UI Design Specification](../../docs/design-docs/Web%20UI%20Design%20Specification.md)：
+- [Web UI Design Specification](../../docs/design-docs/ui/web-ui-design-spec.md)：
   應用程式殼層、共用元件、互動、accessibility 與 responsive direction。
-- [Color & Theme Specification](../../docs/design-docs/Color%20%26%20Theme%20Specification.md)：
+- [Color & Theme Specification](../../docs/design-docs/ui/color-theme-spec.md)：
   semantic color 與 theme token 的規範來源；若與視覺圖例衝突，以此 Markdown
   specification 為準。
-- [Color & Component Guide](../../docs/design-docs/Color%20%26%20Component%20Guide.png)：
+- [Color & Component Guide](../../docs/design-docs/ui/color-component-guide.png)：
   視覺輔助參考，不取代 Color & Theme Specification 的 token 規範。
 
 本期明確覆寫設計文件中的完整初始介面範圍：只交付 HOME 與 SETTINGS、沒有 global

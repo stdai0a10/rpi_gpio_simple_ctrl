@@ -9,13 +9,13 @@ Frontend shell；HOME 只呈現產品標題，SETTINGS 提供可操作的 Appear
 
 **Status:** ready-for-agent
 
-- [ ] HOME 與 SETTINGS 都可由真實路由到達，導覽只顯示 HOME 與 SETTINGS，且 HOME
+- [x] HOME 與 SETTINGS 都可由真實路由到達，導覽只顯示 HOME 與 SETTINGS，且 HOME
   只顯示 `RPI GPIO Simple Controller` 標題。
-- [ ] Desktop Sidebar 與 mobile Top Bar／Drawer 遵守已核准的 breakpoint、關閉、焦點
+- [x] Desktop Sidebar 與 mobile Top Bar／Drawer 遵守已核准的 breakpoint、關閉、焦點
   回復、scroll lock、touch target、focus 與 reduced-motion 行為。
-- [ ] SETTINGS 的 Appearance 區塊以可存取的三選一控制項提供 跟隨系統、淺色、深色；
+- [x] SETTINGS 的 Appearance 區塊以可存取的三選一控制項提供 跟隨系統、淺色、深色；
   無效或缺失的儲存值安全回退為 System，且 System mode 會即時反映系統偏好變更。
-- [ ] 視覺實作遵守本 feature spec 引用的 semantic token、字型、outline icon 與
+- [x] 視覺實作遵守本 feature spec 引用的 semantic token、字型、outline icon 與
   Light／Dark 語意規範，不引入 CDN 字型、第二套 icon 或 styling system。
-- [ ] 所有行為依 Red-Green-Refactor 開發，並由 mounted application seam 的自動化
+- [x] 所有行為依 Red-Green-Refactor 開發，並由 mounted application seam 的自動化
   測試驗證；完整前端品質檢查通過。
